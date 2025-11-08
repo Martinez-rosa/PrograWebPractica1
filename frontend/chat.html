@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat en Tiempo Real - ProgaWeb1</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="chat.css">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1 class="chat-title">💬 Chat en Tiempo Real</h1>
+            <div class="header-actions">
+                <button id="historyBtn" class="history-btn">📋 Historial</button>
+                <a href="/" class="back-btn">← Volver al Inicio</a>
+            </div>
+        </div>
+
+        <div class="chat-card">
+            <div class="messages-container">
+                <ul id="messages"></ul>
+            </div>
+            <div id="typingIndicator" class="typing-indicator" style="display:none;"></div>
+            
+            <form id="form" class="chat-form">
+                <input id="input" autocomplete="off" placeholder="Escribe tu mensaje..." />
+                <button type="submit" class="send-btn">Enviar</button>
+            </form>
+            
+            <div class="user-count" id="userCount">Usuarios conectados: 1</div>
+        </div>
+    </div>
+
+    <!-- Modal de Historial -->
+    <div id="historyModal" class="modal">
+        <div class="modal-content">
+            <span id="closeHistory" class="close">&times;</span>
+            <h2>Historial de chat (últimos 50)</h2>
+            <ul id="historyList" style="list-style-type:none; margin-top: 15px;"></ul>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

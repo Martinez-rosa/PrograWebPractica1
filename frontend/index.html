@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestion  de productos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Gestión de Productos</h1>
+
+    <!-- Sección de Autenticación -->
+    <section class="auth-section" id="authSection">
+      <!-- Login -->
+      <div class="card" id="loginCard">
+        <h2>Iniciar Sesión</h2>
+        <form id="loginForm">
+          <label for="loginEmail">Email:</label>
+          <input type="email" id="loginEmail" name="loginEmail" required>
+
+          <label for="loginPassword">Contraseña:</label>
+          <input type="password" id="loginPassword" name="loginPassword" required>
+
+          <button type="submit" class="btn">Iniciar Sesión</button>
+        </form>
+        <p class="auth-switch">
+          ¿No tienes cuenta? <a href="#" id="showRegister">Regístrate aquí</a>
+        </p>
+        <p id="loginMessage" class="message"></p>
+      </div>
+
+      <!-- Registro -->
+      <div class="card" id="registerCard" style="display: none;">
+        <h2>Crear Cuenta</h2>
+        <form id="registerForm">
+          <label for="registerEmail">Email:</label>
+          <input type="email" id="registerEmail" name="registerEmail" required>
+
+          <label for="registerPassword">Contraseña:</label>
+          <input type="password" id="registerPassword" name="registerPassword" required minlength="6">
+
+          <label for="confirmPassword">Confirmar Contraseña:</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" required minlength="6">
+
+          <button type="submit" class="btn">Crear Cuenta</button>
+        </form>
+        <p class="auth-switch">
+          ¿Ya tienes cuenta? <a href="#" id="showLogin">Inicia sesión aquí</a>
+        </p>
+        <p id="registerMessage" class="message"></p>
+      </div>
+    </section>
+
+    <!-- Contenido Principal de la App -->
+    <div id="appContent" style="display:none;">
+      <!-- Header con info del usuario -->
+      <div class="user-header">
+        <div class="user-info">
+          <span id="userEmail"></span>
+          <span id="userRole" class="role-badge"></span>
+        </div>
+        <div class="header-actions">
+          <button id="chatBtn" class="btn primary">Chat</button>
+          <button id="logoutBtn" class="btn secondary">Cerrar Sesión</button>
+        </div>
+      </div>
+
+      <!-- Formulario para crear un producto (solo admin) -->
+      <section class="card" id="createProductSection">
+        <h2>Crear nuevo producto</h2>
+        <form id="productForm">
+          <label for="name">Nombre:</label>
+          <input type="text" id="name" name="name" required>
+
+          <label for="price">Precio:</label>
+          <input type="number" id="price" name="price" required>
+
+          <label for="description">Descripción:</label>
+          <textarea id="description" name="description" rows="4" required></textarea>
+
+          <label>Foto (opcional):</label>
+          <div class="file-upload">
+            <input type="file" id="productImage" name="productImage" accept="image/*" style="display:none">
+            <label for="productImage" class="btn secondary">Seleccionar imagen</label>
+            <span id="fileName" class="file-name">Ningún archivo seleccionado</span>
+          </div>
+          <div id="previewContainer" style="margin-top:10px;">
+            <img id="imagePreview" alt="Previsualización" style="max-width:160px; max-height:160px; border-radius:8px; display:none; object-fit:cover; border:1px solid #ccc;" />
+          </div>
+
+          <button type="submit" class="btn">Crear Producto</button>
+        </form>
+      </section>
+
+    <hr>
+
+    <!-- Tabla para mostrar los productos -->
+    <section class="card">
+      <h2>Lista de productos</h2>
+      <input type="text" id="search" placeholder="Buscar productos por nombre o descripción..." class="search-input">
+      <button id="loadProductsBtn" class="btn secondary">Cargar productos</button>
+      <table id="productsTable">
+        <thead>
+          <tr>
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      
+      <!-- Modal para editar producto -->
+      <div id="editModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Editar Producto</h2>
+          <form id="editForm">
+            <input type="hidden" id="editId">
+            
+            <label for="editName">Nombre:</label>
+            <input type="text" id="editName" name="editName" required>
+            
+            <label for="editPrice">Precio:</label>
+            <input type="number" id="editPrice" name="editPrice" required>
+            
+            <label for="editDescription">Descripción:</label>
+            <textarea id="editDescription" name="editDescription" rows="4" required></textarea>
+            
+            <label>Cambiar foto (opcional):</label>
+            <div class="file-upload">
+              <input type="file" id="editImage" name="editImage" accept="image/*" style="display:none">
+              <label for="editImage" class="btn secondary">Seleccionar imagen</label>
+              <span id="editFileName" class="file-name">Ningún archivo seleccionado</span>
+            </div>
+            <div id="editPreviewContainer" style="margin-top:10px;">
+              <img id="editImagePreview" alt="Previsualización" style="max-width:160px; max-height:160px; border-radius:8px; display:none; object-fit:cover; border:1px solid #ccc;" />
+            </div>
+            
+            <button type="submit" class="btn">Guardar Cambios</button>
+          </form>
+        </div>
+      </div>
+    </section>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

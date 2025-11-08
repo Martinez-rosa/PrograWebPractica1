@@ -25,29 +25,6 @@ Aplicación con backend en Express + MongoDB, autenticación JWT y un chat en ti
   - El frontend guarda el token en `localStorage` y cookie `auth_token` para poder proteger rutas HTML como `/chat` desde el backend.
 
 
-## Estructura
-
-ProgaWeb1/
-├── backend/
-│   ├── .env                 # Variables de entorno
-│   ├── config.js            # Configuración de DB y entorno
-│   ├── middleware/
-│   │   └── auth.js          # JWT, authorize y authenticatePage
-│   ├── models/
-│   │   ├── user.js          # Modelo de usuario
-│   │   └── products.js      # Modelo de productos
-│   ├── routes/
-│   │   ├── auth.js          # Registro/Login
-│   │   └── productos.js     # CRUD de productos
-│   │   └── chatroutes.js    # Ruta HTML protegida para /chat
-│   └── server.js            # Servidor + Socket.IO + chat
-├── frontend/
-│   ├── index.html           # Home + login/registro + productos
-│   ├── main.js              # Lógica de UI y autenticación
-│   ├── chat.html            # Chat protegido
-│   └── styles.css           # Estilos
-└── README.md
-
 ## Variables de entorno (`backend/.env`)
 
 - `PORT=3000` (puerto del servidor)
@@ -145,13 +122,4 @@ ProgaWeb1/
 - Inicia sesión desde la página principal.
 - Entra al chat; escribe y envía mensajes.
 - Abre el “📋 Historial” para ver los últimos 50 mensajes.
-
-## Limitaciones y próximos pasos
-
-- El historial ahora persiste en MongoDB. Se podrían añadir paginación y limpieza programada.
-- El contador de usuarios puede desalinearse en desconexiones no limpias; se mitiga llevando `socket → username` y removiendo en `disconnect`.
-- Cookie de token no es HttpOnly (la gesiona el frontend). Se recomienda mover el `Set-Cookie` al backend para aumentar seguridad.
-- No hay salas/rooms; todo es chat global.
-
-
 ---

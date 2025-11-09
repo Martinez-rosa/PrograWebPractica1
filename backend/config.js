@@ -17,28 +17,27 @@ const dbConfig = {
     }
 };
 
-/**
- * Función para conectar a MongoDB
- * @returns {Promise} Promesa de conexión
- */
+//Función para conectar a MongoDB
+//Promesa de conexión
+ 
 const connectDB = async () => {
     try {
-        console.log('🔄 Intentando conectar a MongoDB...');
-        console.log('📍 URI:', dbConfig.mongoURI.replace(/\/\/.*@/, '//***:***@')); // Ocultar credenciales en logs
+        console.log('Intentando conectar a MongoDB...');
+        console.log('URI:', dbConfig.mongoURI.replace(/\/\/.*@/, '//***:***@')); // Ocultar credenciales en logs
         
         const conn = await mongoose.connect(dbConfig.mongoURI, dbConfig.options);
         
-        console.log('✅ Conectado a MongoDB exitosamente');
-        console.log(`🏠 Host: ${conn.connection.host}`);
-        console.log(`📊 Base de datos: ${conn.connection.name}`);
+        console.log('Conectado a MongoDB exitosamente');
+        console.log(`Host: ${conn.connection.host}`);
+        console.log(`Base de datos: ${conn.connection.name}`);
         
         return conn;
     } catch (error) {
-        console.error('❌ Error al conectar a MongoDB:', error.message);
+        console.error('Error al conectar a MongoDB:', error.message);
         
         // Mostrar información adicional del error
         if (error.code) {
-            console.error(`🔢 Código de error: ${error.code}`);
+            console.error(`Código de error: ${error.code}`);
         }
         
         // Reintentar conexión después de 5 segundos
@@ -49,37 +48,35 @@ const connectDB = async () => {
     }
 };
 
-/**
- * Función para desconectar de MongoDB
- * @returns {Promise} Promesa de desconexión
- */
+ //Función para desconectar de MongoDB
+ //Promesa de desconexión
+ 
 const disconnectDB = async () => {
     try {
         await mongoose.connection.close();
         console.log('🔌 Desconectado de MongoDB');
     } catch (error) {
-        console.error('❌ Error al desconectar de MongoDB:', error.message);
+        console.error('Error al desconectar de MongoDB:', error.message);
         throw error;
     }
 };
 
-/**
- * Eventos de conexión de MongoDB
- */
+// Eventos de conexión de MongoDB
+ 
 const setupDBEvents = () => {
     // Cuando la conexión se abre
     mongoose.connection.on('connected', () => {
-        console.log('🟢 Mongoose conectado a MongoDB');
+        console.log('Mongoose conectado a MongoDB');
     });
 
     // Si la conexión arroja un error
     mongoose.connection.on('error', (err) => {
-        console.error('🔴 Error de conexión de Mongoose:', err);
+        console.error('Error de conexión de Mongoose:', err);
     });
 
     // Cuando la conexión se desconecta
     mongoose.connection.on('disconnected', () => {
-        console.log('🟡 Mongoose desconectado de MongoDB');
+        console.log('Mongoose desconectado de MongoDB');
     });
 
     // Si la aplicación Node se termina, cerrar la conexión de Mongoose
@@ -89,16 +86,14 @@ const setupDBEvents = () => {
             console.log('🔌 Conexión de Mongoose cerrada debido a la terminación de la aplicación');
             process.exit(0);
         } catch (error) {
-            console.error('❌ Error al cerrar la conexión:', error);
+            console.error('Error al cerrar la conexión:', error);
             process.exit(1);
         }
     });
 };
 
-/**
- * Función para verificar el estado de la conexión
- * @returns {string} Estado de la conexión
- */
+ //Función para verificar el estado de la conexión
+
 const getConnectionStatus = () => {
     const states = {
         0: 'desconectado',
@@ -110,9 +105,8 @@ const getConnectionStatus = () => {
     return states[mongoose.connection.readyState] || 'desconocido';
 };
 
-/**
- * Configuración del entorno
- */
+ //Configuración del entorno
+ 
 const envConfig = {
     NODE_ENV: process.env.NODE_ENV || 'development',
     PORT: process.env.PORT || 3000,

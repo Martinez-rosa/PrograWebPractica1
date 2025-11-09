@@ -34,7 +34,7 @@ function authenticate(req, res, next) {
   }
 }
 
-// Middleware para proteger páginas HTML (ej. /chat) usando cookie o query
+// Middleware para proteger usando cookie o query
 function authenticatePage(req, res, next) {
   let token = null;
   const cookies = parseCookies(req);

@@ -64,11 +64,6 @@ app.get('/', (req, res) => {
 const chatRouter = require('./routes/chatroutes');
 app.use('/', chatRouter);
 
-// Rutas del chat eliminadas
-
-
-// Lógica de chat y Socket.IO eliminadas
-
 let connectedUsers = new Set();
 // Usuarios escribiendo actualmente (username => timeout)
 let typingUsers = new Map();
@@ -118,7 +113,7 @@ io.on('connection', async (socket) => {
   }
   
   socket.on('user joined', (usernameFromClient) => {
-    // Si ya tenemos username (por token), ignorar para evitar duplicados
+  
     if (currentUsername) return;
     const effectiveUsername = usernameFromClient || 'Usuario';
     console.log(effectiveUsername + ' se ha unido al chat (cliente)');
@@ -130,7 +125,7 @@ io.on('connection', async (socket) => {
     io.emit('user joined', effectiveUsername);
   });
 
-  // Entregar historial bajo demanda (últimos 50 mensajes desde MongoDB)
+  //Monstrar historial
   socket.on('get history', async () => {
     try {
       const recent = await ChatMessage.find({})

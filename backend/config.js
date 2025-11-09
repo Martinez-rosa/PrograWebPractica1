@@ -2,19 +2,18 @@ const mongoose = require('mongoose');
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '.env') });
 
-/**
- * Configuración de la base de datos
- */
+//Configuración de la base de datos
+ 
 const dbConfig = {
     // URI de conexión a MongoDB
     mongoURI: process.env.MONGODB_URI || 'mongodb://localhost:27017/productos',
     
     // Opciones de conexión
     options: {
-        serverSelectionTimeoutMS: 5000, // Timeout después de 5s en lugar de 30s
-        socketTimeoutMS: 45000, // Cerrar sockets después de 45s de inactividad
-        maxPoolSize: 10, // Mantener hasta 10 conexiones de socket
-        heartbeatFrequencyMS: 10000, // Cada cuánto tiempo enviar un heartbeat
+        serverSelectionTimeoutMS: 5000,
+        socketTimeoutMS: 45000, 
+        maxPoolSize: 10, 
+        heartbeatFrequencyMS: 10000, 
     }
 };
 
